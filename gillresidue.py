@@ -24,13 +24,13 @@ def simulate(k_op, k_cl, k_ch, t, N_replicas=100, show_time=False):
     Parameters
     ----------
     k_op : float
-        opening rate constant, in s^(-1)
+        opening rate constant, s^-1
     k_cl : float
-        closing rate constant, in s^(-1)
+        closing rate constant, s^-1
     k_ch : float
-        intrinsic exchange (chemical) rate constant, in s^(-1)
+        intrinsic exchange (chemical) rate constant, s^-1
     t : float
-        time at which the simulation can stop, in s
+        length of the simulation, s
     N_replicas : int, optional
         number of replicas of the simulated residue. The default is 100.
     show_time : bool, optional
@@ -44,13 +44,12 @@ def simulate(k_op, k_cl, k_ch, t, N_replicas=100, show_time=False):
             H_cl population at the timepoints of the simulation
         - 'H_op' : np.array, len(H_op) = len(t)
             H_op population at the timepoints of the simulation
-
-
+        - 'D' : np.array, len(D) = len(t)
+            D population at the timepoints of the simulation
+        - N_replicas: int
     """
+    
     print('Simulating Gillespie algorithm ... ')
-    
-    N_replicas = N_replicas
-    
     if show_time:
         tic = time.time()
     
@@ -109,7 +108,6 @@ def plot(gillespie_dict, H=False, save=False, title=None, concentrations=False):
         H = H_cl+H_op
         plt.plot(t, H, label='H', color='slategray')
     plt.plot(t, D, label="D", color="deeppink")
-    
     if title:
         plt.title(title)
     plt.xlabel("time (s)", fontsize=11)
