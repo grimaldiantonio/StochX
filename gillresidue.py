@@ -55,9 +55,9 @@ def simulate(k_op, k_cl, k_ch, t, N_replicas=100, show_time=False):
     
     P = k_cl/k_op
     
-    initials = [int(N_replicas * P/(1+P)),  # [H_cl,
-                int(N_replicas * 1/(1+P)),  #  H_op,
-                0]                          #   D   ]
+    initials = [int(np.round(N_replicas * P/(1+P)),0),  # [ H_cl,
+                int(np.round(N_replicas * 1/(1+P)),0),  #   H_op,
+                0]                                      #   D   ]
     
     propensities = [lambda h_cl, h_op, d: k_op * h_cl, # H_cl -> H_op
                     lambda h_cl, h_op, d: k_cl * h_op, # H_op -> H_cl
